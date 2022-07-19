@@ -119,7 +119,8 @@ def train(dataset, hidden_dim, n_layers, n_classes, fanouts, snapshots, views, s
         if train_contrastive_loss < best_loss:
             best_loss = train_contrastive_loss
             best_model = copy.deepcopy(model)
-        print('Epoch:{}, train_loss:{:.4f}'.format(epoch, float(train_contrastive_loss)))
+        # print('Epoch:{}, train_loss:{:.4f}'.format(epoch, float(train_contrastive_loss)))
+        print("Epoch {:05d} | Loss {:.4f} ". format(epoch, float(train_contrastive_loss)))
         
         
     sampler = MultiLayerFullNeighborSampler(2)
@@ -200,10 +201,9 @@ def train(dataset, hidden_dim, n_layers, n_classes, fanouts, snapshots, views, s
                         eval_micro = test_micro
                         eval_weight = test_weight
 
-                print('Epoch:{}, train_acc:{:.4f}, val_acc:{:4f}, test_micro:{:4f}, test_weight:{:4f}'.format(epoch, train_acc, val_acc, eval_micro, eval_weight))
+                print('Epoch:{}, train_acc:{:.4f}, val_acc:{:4f}, test_micro:{:4f}, test_weight:{:4f}'.format(epoch, train_acc, val_acc, test_micro, test_weight))
         micros.append(eval_micro)
         weights.append(eval_weight)
-        print('Linear evaluation test_micro:{:.4f}, test_weight:{:.4f}'.format(eval_micro, eval_weight))    
 
     micros, weights = th.stack(micros), th.stack(weights)
     print('Linear evaluation Accuracy:{:.4f}, Weighted-F1={:.4f}'.format(micros.mean().item(), weights.mean().item()))
@@ -222,8 +222,7 @@ if __name__ == '__main__':
     parser.add_argument('--views', type=int, default=2)
     parser.add_argument('--strategy', type=str, default='random')
     parser.add_argument('--readout', type=str, default='max')
-    parser.add_argument('--batch_size', type=int, required=True, default=256)
-    parser.add_argument('--lambd', type=float, help='trade-off ratio.')
+    parser.add_argument('--batch_size', type=int, default=256)
     parser.add_argument('--GPU', type=int, required=True)
     parser.add_argument('--num_workers_per_gpu', type=int, default=4)
     parser.add_argument('--epochs', type=int, default=100)
