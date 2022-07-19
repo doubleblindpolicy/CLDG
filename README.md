@@ -18,7 +18,7 @@
 ## Usage
 ```python
 # DBLP
-python main.py --dataset dblp --hidden_dim 128 --n_classes 64 --n_layers 2 --fanout 20,20 --snapshots 4 --views 5 --strategy sequential --epochs 200 --GPU 0
+python main.py --dataset dblp --hidden_dim 128 --n_classes 64 --n_layers 2 --fanout 20,20 --snapshots 4 --views 4 --strategy sequential --epochs 200 --GPU 0
 
 # Bitcoinotc
 python main.py --dataset bitcoinotc --hidden_dim 128 --n_classes 64 --n_layers 2 --fanout 20,20 --snapshots 4 --views 2 --strategy sequential --epochs 100 --GPU 0
